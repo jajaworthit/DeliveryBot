@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Robot System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">🤖</div>
+            <h1 class="title">Delivery Robot System</h1>
+            <p class="subtitle">Smart Delivery Management Platform</p>
+        </div>
+
+        <!-- Delivery Request Form -->
+        <form id="deliveryForm">
+            <div class="form-group">
+                <label>
+                    <span class="label-icon">👤</span>
+                    Full Name *
+                </label>
+                <input type="text" name="name" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <span class="label-icon">📞</span>
+                    Phone Number *
+                </label>
+                <input type="tel" name="phone" placeholder="+1 (555) 123-4567" required>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <span class="label-icon">📍</span>
+                    Delivery Address *
+                </label>
+                <input type="text" name="address" placeholder="123 Main St, City, State 12345" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>
+                        <span class="label-icon">📦</span>
+                        Item Type *
+                    </label>
+                    <select name="itemType" required>
+                        <option value="">Select item type</option>
+                        <option value="documents">Documents</option>
+                        <option value="package">Package</option>
+                        <option value="materials">Materials</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <span class="label-icon">⚡</span>
+                        Delivery Priority *
+                    </label>
+                    <select name="priority" required>
+                        <option value="">Select priority</option>
+                        <option value="standard">Standard (2-3 days)</option>
+                        <option value="express">Express (1 day)</option>
+                        <option value="urgent">Urgent (Same day)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <label>
+                    <span class="label-icon">📝</span>
+                    Item Description *
+                </label>
+                <textarea name="description" placeholder="Describe the items to be delivered (size, weight, quantity...)" required></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>
+                        <span class="label-icon">🕒</span>
+                        Preferred Delivery Time
+                    </label>
+                    <input type="datetime-local" name="deliveryTime">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <span class="label-icon">💬</span>
+                        Special Instructions
+                    </label>
+                    <input type="text" name="instructions" placeholder="Any special handling or delivery notes">
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">
+                    <span class="btn-icon">🚚</span>
+                    <span class="btn-text">Submit Delivery Request</span>
+                </button>
+                <button type="reset" class="reset-btn">
+                    🔄 Clear Form
+                </button>
+            </div>
+
+            <div id="statusMessage" class="request-message"></div>
+        </form>
+
+        <!-- Robot Status Monitoring Section -->
+        <div class="status-monitoring-section">
+            <div class="section-header">
+                <h3 class="section-title">
+                    <span class="title-icon">🤖</span>
+                    Robot Status Monitor
+                </h3>
+                <p class="section-subtitle">Real-time delivery robot status and system information</p>
+            </div>
+
+            <div class="status-grid">
+                <!-- Door Status -->
+                <div class="status-card" id="doorStatus">
+                    <div class="status-header">
+                        <span class="status-icon">🚪</span>
+                        <h4>Door Status</h4>
+                    </div>
+                    <div class="status-indicator" id="doorIndicator">
+                        <div class="status-light"></div>
+                        <span class="status-text">CLOSED</span>
+                    </div>
+                </div>
+
+                <!-- Robot Status -->
+                <div class="status-card" id="robotStatus">
+                    <div class="status-header">
+                        <span class="status-icon">🚚</span>
+                        <h4>Robot Status</h4>
+                    </div>
+                    <div class="status-indicator" id="robotIndicator">
+                        <div class="status-light"></div>
+                        <span class="status-text">IDLE</span>
+                    </div>
+                </div>
+
+                <!-- Battery Status -->
+                <div class="status-card" id="batteryStatus">
+                    <div class="status-header">
+                        <span class="status-icon">🔋</span>
+                        <h4>Battery Level</h4>
+                    </div>
+                    <div class="battery-container">
+                        <div class="battery-bar" id="batteryBar">
+                            <div class="battery-fill"></div>
+                        </div>
+                        <span class="battery-text" id="batteryText">85%</span>
+                    </div>
+                </div>
+
+                <!-- Delivery Progress -->
+                <div class="status-card full-width" id="deliveryProgress">
+                    <div class="status-header">
+                        <span class="status-icon">📊</span>
+                        <h4>Delivery Progress</h4>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progressBar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <div class="progress-steps">
+                            <div class="progress-step" id="step1">
+                                <div class="step-icon">📦</div>
+                                <span>Pickup</span>
+                            </div>
+                            <div class="progress-step" id="step2">
+                                <div class="step-icon">🚚</div>
+                                <span>In Transit</span>
+                            </div>
+                            <div class="progress-step" id="step3">
+                                <div class="step-icon">📍</div>
+                                <span>Delivered</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Connection Status -->
+                <div class="status-card" id="connectionStatus">
+                    <div class="status-header">
+                        <span class="status-icon">📡</span>
+                        <h4>Arduino Connection</h4>
+                    </div>
+                    <div class="status-indicator" id="connectionIndicator">
+                        <div class="status-light"></div>
+                        <span class="status-text">DISCONNECTED</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Control Buttons -->
+            <div class="control-buttons">
+                <button class="control-btn" id="startDeliveryBtn">
+                    <span class="btn-icon">🚀</span>
+                    Start Delivery
+                </button>
+                <button class="control-btn" id="emergencyStopBtn">
+                    <span class="btn-icon">⚠️</span>
+                    Emergency Stop
+                </button>
+                <button class="control-btn refresh-btn" id="refreshStatusBtn">
+                    <span class="btn-icon">🔄</span>
+                    Refresh Status
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

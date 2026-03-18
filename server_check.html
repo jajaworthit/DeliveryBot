@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Server Test</title>
+</head>
+<body>
+    <h1>Server Connection Test</h1>
+    <button onclick="testPHP()">Test PHP Connection</button>
+    <button onclick="testLogin()">Test Login Process</button>
+    <div id="results"></div>
+
+    <script>
+        async function testPHP() {
+            const results = document.getElementById('results');
+            try {
+                const response = await fetch('test.php');
+                const data = await response.json();
+                results.innerHTML = '<h3>PHP Test Success:</h3><pre>' + JSON.stringify(data, null, 2) + '</pre>';
+            } catch (error) {
+                results.innerHTML = '<h3>PHP Test Failed:</h3><p>' + error.message + '</p>';
+            }
+        }
+
+        async function testLogin() {
+            const results = document.getElementById('results');
+            try {
+                const formData = new FormData();
+                formData.append('username', 'test');
+                formData.append('password', 'test');
+                
+                const response = await fetch('login_process.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                results.innerHTML = '<h3>Login Test Response:</h3><pre>' + JSON.stringify(data, null, 2) + '</pre>';
+            } catch (error) {
+                results.innerHTML = '<h3>Login Test Failed:</h3><p>' + error.message + '</p>';
+            }
+        }
+    </script>
+</body>
+</html>

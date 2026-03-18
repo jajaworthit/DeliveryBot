@@ -1,0 +1,3 @@
+Request ID,Customer,Phone,Pickup,Delivery,Time,Item Type,Description,Priority
+DR001,John Smith,+1234567890,123 Main St,456 Oak Ave,2024-02-20 14:30,Documents,Small documents package,Next
+DR002,Sarah Johnson,+0987654321,789 Pine Rd,321 Elm St,2024-02-20 15:00,Materials,Building materials,Queue
